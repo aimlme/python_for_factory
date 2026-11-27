@@ -1,0 +1,8 @@
+# PyTorch: install the CUDA build first (see README), then:
+ultralytics>=8.4
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart
+opencv-python
+onnx            # for .onnx export (optional)
+requests        # tools/plc_sim.py

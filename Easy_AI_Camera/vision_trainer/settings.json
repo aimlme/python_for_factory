@@ -1,0 +1,82 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8600
+  },
+  "data_dir": "data",
+
+  "camera": {
+    "type": "uvc",
+    "enabled": true,
+    "sn": "FGT24020986",
+    "exposure_us": 5000,
+    "gain_db": 0,
+    "rotate": 0,
+    "uvc": {
+      "index": 0,
+      "width": 1280,
+      "height": 960,
+      "fps": 30,
+      "backend": "dshow",
+      "exposure": null
+    }
+  },
+
+  "plc": {
+    "enabled": true,
+    "listen_ip": "0.0.0.0",
+    "trigger_port": 8500,
+    "trigger_command": "COMMAND1",
+    "plc_ip": "192.168.3.250",
+    "result_port": 4096,
+    "ok_code": "OKOK",
+    "ng_general_code": "AL01",
+    "error_code": "ER01",
+    "heartbeat_code": "HB01",
+    "heartbeat_s": 0,
+    "defect_codes": {
+      "hole_deform": "AL04",
+      "crack": "AL05"
+    }
+  },
+
+  "capture": {
+    "jpeg_quality": 95,
+    "target_ok": 100,
+    "target_per_class": 50,
+    "min_per_class": 30
+  },
+
+  "training": {
+    "device": "auto",
+    "val_ratio": 0.2,
+    "workers": 2,
+    "export_onnx": true,
+    "amp": true,
+    "augment": {
+      "hsv_v": 0.4, "hsv_h": 0.0, "hsv_s": 0.0,
+      "degrees": 45.0, "translate": 0.1, "scale": 0.25,
+      "fliplr": 0.5, "flipud": 0.5, "mosaic": 1.0, "mixup": 0.0
+    },
+    "presets": {
+      "fast":     {"model": "yolo26n.pt", "epochs": 50,  "imgsz": 640,  "patience": 15, "batch": 16},
+      "accurate": {"model": "yolo26m.pt", "epochs": 150, "imgsz": 1280, "patience": 20, "batch": 8}
+    }
+  },
+
+  "prelabel": {
+    "conf": 0.25
+  },
+
+  "sam": {
+    "model": "mobile_sam.pt"
+  },
+
+  "runtime": {
+    "default_threshold": 0.5,
+    "review_low": 0.35,
+    "review_high": 0.55,
+    "save_ng_images": true,
+    "auto_retrain_every": 50
+  }
+}
